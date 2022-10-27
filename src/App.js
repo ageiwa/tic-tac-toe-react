@@ -1,8 +1,12 @@
-import Home from './components/Home'
 import './App.css';
+import Field from './components/Field';
 
 const App = () => {
-  return <Home />
+  return(
+    <div className='tic-tac-toe'>
+      <Field />
+    </div>
+  );
 }
 
 export default App;
