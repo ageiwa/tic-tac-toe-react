@@ -1,9 +1,11 @@
 .field {
     border-radius: 10px;
+    padding: 10px;
     width: 400px;
     height: 400px;
     background-color: #fff;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
     box-shadow: 0px 0px 8px 5px rgba(34, 60, 80, 0.2);
 }
