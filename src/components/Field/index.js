@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import './index.css';
 
+import Cell from '../Cell';
+
 import Vivus from 'vivus';
 import svgX from './x.svg';
 import svgO from './o.svg';
 
-import Cell from '../Cell';
-
 const Field = (props) => {
     const [flag, setFlag] = useState(true);
+    const [field, setField] = useState([
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', '']
+    ])
     const cells = [];
 
-    function fun(e) {
+    function makeMove(e) {
         const cell = e.currentTarget;
-
         let player = svgX;
 
         if (flag) {
@@ -36,8 +40,12 @@ const Field = (props) => {
         );
     }
 
-    for (let i = 0; i < 9; i++) {
-        cells.push(<Cell key={i} handleClick={fun} />);
+    for (let i = 0; i < field.length; i++) {
+        
+        for (let j = 0; j < field.length; j++) {
+            cells.push(<Cell key={i+''+j} handleClick={makeMove} />);
+        }
+
     }
 
     return(
