@@ -40,7 +40,7 @@ const Field = () => {
                 cell,
                 {
                   type: 'oneByOne',
-                  duration: 50,
+                  duration: 500,
                   file: player,
                   animTimingFunction: Vivus.EASE
                 }
