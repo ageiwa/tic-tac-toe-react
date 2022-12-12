@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import './index.css';
 
+import { legacy_createStore } from 'redux';
+import store from '../../store';
+
 import Cell from '../Cell';
 
 import Snap from 'snapsvg-cjs';
@@ -33,6 +36,7 @@ function animateCicle(svg) {
 }
 
 const Field = () => {
+    const storeRedux = legacy_createStore(store);
     const [order, setOrder] = useState('X');
     const [field, setField] = useState([
         ['', '', ''],
@@ -56,10 +60,13 @@ const Field = () => {
                     animateLine(svgElem, 0, 0, 100, 100);
                 });
 
+                storeRedux.dispatch({type: order});
                 setOrder('O');
             }
             else {
                 animateCicle(svgElem);
+
+                storeRedux.dispatch({type: order});
                 setOrder('X');
             }
 
