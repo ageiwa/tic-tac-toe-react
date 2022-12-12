@@ -17,6 +17,18 @@ body {
     justify-content: center;
 }
 
+.title {
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.title__img {
+    margin-left: 10px;
+    width: 35px;
+    height: 35px;
+}
+
 .tic-tac-toe {
     display: flex;
     flex-direction: column;
