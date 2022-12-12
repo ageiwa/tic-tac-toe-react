@@ -6,12 +6,16 @@ import Cell from '../Cell';
 import Snap from 'snapsvg-cjs';
 
 function animateLine(svg, x1, y1, x2, y2, callback) {
+    svg.attr({viewBox: '0 0 100 100'});
+
     const line = svg.line(x1, y1, x1, y1);
     line.attr({stroke: '#fff', strokeWidth: 8});
     line.animate({x1: x1, y1: y1, x2: x2, y2: y2}, 250, callback);
 }
 
 function animateCicle(svg) {
+    svg.attr({viewBox: '0 0 100 100'});
+
     const circle = svg.circle(50, 50, 45);
     circle.attr({
         fill: 'transparent', 
@@ -43,9 +47,7 @@ const Field = () => {
 
         if (fieldAr[i][j] === '') {
             const cell = e.target;
-
             const svgElem = Snap().appendTo(cell);
-            svgElem.attr({viewBox: '0 0 100 100'});
 
             fieldAr[i][j] = order;
 
@@ -61,7 +63,31 @@ const Field = () => {
                 setOrder('X');
             }
 
+            checkWin(order);
             setField(fieldAr);
+        }
+    }
+
+    function checkWin(order) {
+        const fieldAr = field;
+        const winArray = [
+            // verticals
+            fieldAr[0][0] === order && fieldAr[0][1] === order && fieldAr[0][2] === order,
+            fieldAr[1][0] === order && fieldAr[1][1] === order && fieldAr[1][2] === order,
+            fieldAr[2][0] === order && fieldAr[2][1] === order && fieldAr[2][2] === order,
+
+            // horizontal
+            fieldAr[0][0] === order && fieldAr[1][0] === order && fieldAr[2][0] === order,
+            fieldAr[0][1] === order && fieldAr[1][1] === order && fieldAr[2][1] === order,
+            fieldAr[0][2] === order && fieldAr[1][2] === order && fieldAr[2][2] === order,
+
+            // diogonally
+            fieldAr[0][0] === order && fieldAr[1][1] === order && fieldAr[2][2] === order,
+            fieldAr[0][2] === order && fieldAr[1][1] === order && fieldAr[2][0] === order,
+        ]
+
+        for (let i = 0; i < winArray.length; i++) {
+            if (winArray[i]) console.log('Winner' + order);
         }
     }
 
