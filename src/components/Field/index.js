@@ -50,8 +50,8 @@ const Field = () => {
             fieldAr[i][j] = order;
 
             if (order === 'X') {
-                animateLine(svgElem, 0, 0, 100, 100, () => {
-                    animateLine(svgElem, 100, 0, 0, 100);
+                animateLine(svgElem, 100, 0, 0, 100, () => {
+                    animateLine(svgElem, 0, 0, 100, 100);
                 });
 
                 setOrder('O');
