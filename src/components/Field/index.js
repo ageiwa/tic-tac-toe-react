@@ -18,13 +18,13 @@ function animateCicle(svg) {
         stroke: '#fff',
         strokeWidth: 8,
         strokeDasharray: 283,
-        strokeDashoffset: 283
+        strokeDashoffset: 283,
+        'transform-origin': 'center',
+        transform: 'scale(-1, 1) rotate(-90)',
     });
     
     Snap.animate(283, 0, (value) => {
-        circle.attr({
-            strokeDashoffset: value
-        });
+        circle.attr({strokeDashoffset: value});
     }, 500);
 }
 
