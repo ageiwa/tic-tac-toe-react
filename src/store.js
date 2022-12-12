@@ -5,6 +5,7 @@ function store(state = {order: 'X'}, action) {
     else if (action.type === 'O') {
         return {order: 'O'}
     }
+    else return state;
 }
 
 export default store;

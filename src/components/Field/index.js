@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import './index.css';
 
-import { legacy_createStore } from 'redux';
-import store from '../../store';
-
 import Cell from '../Cell';
 
 import Snap from 'snapsvg-cjs';
+import { useDispatch, useSelector } from 'react-redux';
 
 function animateLine(svg, x1, y1, x2, y2, callback) {
     svg.attr({viewBox: '0 0 100 100'});
@@ -36,7 +34,7 @@ function animateCicle(svg) {
 }
 
 const Field = () => {
-    const storeRedux = legacy_createStore(store);
+    const dispatch = useDispatch();
     const [order, setOrder] = useState('X');
     const [field, setField] = useState([
         ['', '', ''],
@@ -60,13 +58,13 @@ const Field = () => {
                     animateLine(svgElem, 0, 0, 100, 100);
                 });
 
-                storeRedux.dispatch({type: order});
+                dispatch({type: 'O'});
                 setOrder('O');
             }
             else {
                 animateCicle(svgElem);
 
-                storeRedux.dispatch({type: order});
+                dispatch({type: 'X'});
                 setOrder('X');
             }
 
