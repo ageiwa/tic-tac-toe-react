@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './index.css';
 import { useDispatch } from 'react-redux';
 
@@ -6,9 +6,12 @@ import Cell from '../Cell';
 
 import drawingO from './drawingO';
 import drawingX from './drawingX';
+import winnerLine from './winnerLine';
 
 const Field = () => {
     const dispatch = useDispatch();
+    const refToField = useRef(null);
+
     const [order, setOrder] = useState('X');
     const [field, setField] = useState([
         ['', '', ''],
@@ -44,12 +47,12 @@ const Field = () => {
     function checkWin(order) {
         const fieldAr = field;
         const winArray = [
-            // verticals
+            // horizontal
             fieldAr[0][0] === order && fieldAr[0][1] === order && fieldAr[0][2] === order,
             fieldAr[1][0] === order && fieldAr[1][1] === order && fieldAr[1][2] === order,
             fieldAr[2][0] === order && fieldAr[2][1] === order && fieldAr[2][2] === order,
 
-            // horizontal
+            // verticals
             fieldAr[0][0] === order && fieldAr[1][0] === order && fieldAr[2][0] === order,
             fieldAr[0][1] === order && fieldAr[1][1] === order && fieldAr[2][1] === order,
             fieldAr[0][2] === order && fieldAr[1][2] === order && fieldAr[2][2] === order,
@@ -60,7 +63,7 @@ const Field = () => {
         ]
 
         for (let i = 0; i < winArray.length; i++) {
-            if (winArray[i]) console.log('Winner' + order);
+            if (winArray[i]) winnerLine(i, refToField);
         }
     }
 
@@ -73,7 +76,7 @@ const Field = () => {
     }
 
     return(
-        <div className='field'>
+        <div className='field' ref={refToField}>
             {cells}
         </div>
     )
